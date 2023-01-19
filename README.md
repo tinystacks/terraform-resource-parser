@@ -11,7 +11,7 @@ To increase the priority of this parser, you can install this package as a dev d
 ```json
 {
   // ...
-  "awsCdkParsers": [
+  "terraformParsers": [
     "@tinystacks/terraform-resource-parser"
     // ...other parsers
   ]
