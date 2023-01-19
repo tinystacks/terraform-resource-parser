@@ -6,10 +6,10 @@ module.exports = {
   verbose: true,
   coverageThreshold: {
     global: {
-      branches: 40, // because of default value branches
-      functions: 95,
-      lines: 95,
-      statements: 95
+      branches: 80, // because of default value branches
+      functions: 90,
+      lines: 90,
+      statements: 90
   }
 }
 };

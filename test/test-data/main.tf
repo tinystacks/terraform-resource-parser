@@ -2,6 +2,7 @@ resource "aws_vpc" "ts_aws_vpc" {
   cidr_block           = var.ts_aws_vpc_cidr_block
   instance_tenancy     = "default"
   enable_dns_hostnames = true
+  ipv6_cidr_block = "0:0:0:0:0:0:0:1"
 }
 
 /* */
