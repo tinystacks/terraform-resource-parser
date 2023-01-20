@@ -1,4 +1,4 @@
-import { TfDiff, Json, TxtFile, JsonFile, TerraformTypes } from '@tinystacks/iac-utils';
+import { TfDiff, Json, TxtFile, JsonFile, TerraformTypes } from '@tinystacks/predeploy-infra';
 import { getTfEntry, resolveValue } from './helpers';
 
 const {

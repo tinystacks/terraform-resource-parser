@@ -1,4 +1,4 @@
-import { TfDiff, Json, TxtFile, JsonFile } from '@tinystacks/iac-utils';
+import { TfDiff, Json, TxtFile, JsonFile } from '@tinystacks/predeploy-infra';
 import { getTfEntry, resolveValue } from './helpers';
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Address.html
