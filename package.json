@@ -1,6 +1,6 @@
 {
   "name": "@tinystacks/terraform-resource-parser",
-  "version": "0.0.1-local.3",
+  "version": "0.0.1-local.5",
   "description": "",
   "main": "dist/index.js",
   "files": [
