@@ -1,4 +1,4 @@
-import { TfDiff, Json, TxtFile, JsonFile } from '@tinystacks/predeploy-infra';
+import { TfDiff, Json, TxtFile, JsonFile } from '@tinystacks/precloud';
 import { getTfEntry, resolveValue } from './helpers';
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Address.html

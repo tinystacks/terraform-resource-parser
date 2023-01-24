@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import isPlainObject from 'lodash.isplainobject';
-import { Json, JsonFile, TfDiff } from '@tinystacks/predeploy-infra';
+import { Json, JsonFile, TfDiff } from '@tinystacks/precloud';
 
 function getTfEntry (diff: TfDiff, tfJson: JsonFile[]): Json | undefined {
   const { logicalId, resourceType } = diff;

@@ -1,5 +1,5 @@
 import isNil from 'lodash.isnil';
-import { Json, TfDiff } from '@tinystacks/predeploy-infra';
+import { Json, TfDiff } from '@tinystacks/precloud';
 import get from 'lodash.get';
 
 function resolveValue (diff: TfDiff, tfPlan: Json, tfEntry: Json, propertyName: string) {

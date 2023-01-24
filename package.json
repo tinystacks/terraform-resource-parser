@@ -1,6 +1,6 @@
 {
   "name": "@tinystacks/terraform-resource-parser",
-  "version": "0.0.1-local.5",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "files": [
@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/tinystacks/terraform-resource-parser#readme",
   "devDependencies": {
-    "@tinystacks/predeploy-infra": "^1.0.1-local.1",
+    "@tinystacks/precloud": "^1.0.2",
     "@types/cached": "^6.0.0",
     "@types/jest": "^28.1.7",
     "@types/lodash.get": "^4.4.7",

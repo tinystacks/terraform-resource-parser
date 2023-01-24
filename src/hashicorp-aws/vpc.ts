@@ -1,4 +1,4 @@
-import { TfDiff, Json, TxtFile, JsonFile, TerraformTypes } from '@tinystacks/predeploy-infra';
+import { TfDiff, Json, TxtFile, JsonFile, TerraformTypes } from '@tinystacks/precloud';
 import { getTfEntry, resolveValue } from './helpers';
 
 const {
