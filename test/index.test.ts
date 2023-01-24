@@ -56,8 +56,9 @@ jest.mock('../src/hashicorp-aws', () => ({
   parseVpc: mockParseVpc
 }));
 
-import { TfDiff } from '@tinystacks/precloud';
+import { Json, TfDiff } from '@tinystacks/precloud';
 import { TinyStacksTerraformResourceParser } from '../src';
+import { TMP_DIRECTORY } from '../src/constants';
 
 const fs = require('fs');
 const path = require('path');
@@ -84,6 +85,41 @@ describe('Tinystacks Resource Parser', () => {
     // for spies
     jest.restoreAllMocks();
   });
+
+  describe('constructor', () => {
+    it('cache populates appropriately', async () => {
+      const parser = new TinyStacksTerraformResourceParser();
+      expect(await parser.tfFilesCache.getOrElse('backend')).toBe(mockTfFiles);
+    });
+  });
+
+  describe('writeToTmpFile', () => {
+    const parser = new TinyStacksTerraformResourceParser();
+    const tfJson: Json = { "test": "me" };
+    it('makes dir and writes file to it when the dir is not already present', () => {
+      let writtenFileName, writtenFileContents;
+      mockWriteFileSync.mockImplementation((fileName, contents) => {
+        writtenFileContents = contents;
+        writtenFileName = fileName;
+      });
+      parser.writeToTmpFile(tfJson);
+      expect(writtenFileName).toBe(TMP_DIRECTORY + '/tf-json.json');
+      expect(writtenFileContents).toBe(JSON.stringify(tfJson, null, 2));
+    });
+
+    it('writes to file when dir is already present', () => {
+      let writtenFileName, writtenFileContents;
+      mockExistsSync.mockImplementation(() => true);
+      mockWriteFileSync.mockImplementation((fileName, contents) => {
+        writtenFileContents = contents;
+        writtenFileName = fileName;
+      });
+      parser.writeToTmpFile(tfJson);
+      expect(writtenFileName).toBe(TMP_DIRECTORY + '/tf-json.json');
+      expect(writtenFileContents).toBe(JSON.stringify(tfJson, null, 2));
+    });
+  });
+
   describe('parseResource', () => {
     const parser = new TinyStacksTerraformResourceParser();
     it('returns undefined if there is no parser for the resource type', async () => {
