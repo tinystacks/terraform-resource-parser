@@ -1,1 +1,1 @@
-Initial release
+Document supported parsing functionality in the README.
