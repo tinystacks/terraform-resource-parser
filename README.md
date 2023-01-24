@@ -8,7 +8,7 @@ To increase the priority of this parser, you can install this package as a dev d
 
 `npm i -D @tinystacks/terraform-resource-parser`
 
-```json
+```jsonc
 {
   // ...
   "terraformParsers": [
