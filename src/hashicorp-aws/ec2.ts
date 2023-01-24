@@ -1,5 +1,6 @@
 import { TfDiff, Json, TxtFile, JsonFile } from '@tinystacks/precloud';
 import { getTfEntry, resolveValue } from './helpers';
+import { dontReturnEmpty } from '../utils';
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Address.html
 function parseEip (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: JsonFile[]): Json {
@@ -12,7 +13,7 @@ function parseEip (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: Json
   const publicIpv4Pool = resolveValue(diff, tfPlan, tfEntry, 'public_ipv4_pool');
   const tagSet = resolveValue(diff, tfPlan, tfEntry, 'tags');
 
-  return {
+  const properties = {
     domain,
     instanceId,
     customerOwnedIpv4Pool,
@@ -21,6 +22,8 @@ function parseEip (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: Json
     publicIpv4Pool,
     tagSet
   };
+
+  return dontReturnEmpty(properties);
 }
 
 export {

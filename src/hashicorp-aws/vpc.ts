@@ -1,5 +1,6 @@
 import { TfDiff, Json, TxtFile, JsonFile, TerraformTypes } from '@tinystacks/precloud';
 import { getTfEntry, resolveValue } from './helpers';
+import { dontReturnEmpty } from '../utils';
 
 const {
   TF_ROUTE_TABLE_ASSOCIATION,
@@ -24,12 +25,14 @@ function parseVpc (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: Json
   }
   const tagSet = tfEntry?.tags;
 
-  return {
+  const properties = {
     cidrBlock,
     instanceTenancy,
     ipv6CidrBlockAssociationSet,
     tagSet
   };
+
+  return dontReturnEmpty(properties);
 }
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_NatGateway.html
@@ -39,11 +42,13 @@ function parseNatGateway (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
   const subnetId = resolveValue(diff, tfPlan, tfEntry, 'subnet_id');
   const tagSet = resolveValue(diff, tfPlan, tfEntry, 'tags');
 
-  return {
+  const properties = {
     connectivityType,
     subnetId,
     tagSet
   };
+
+  return dontReturnEmpty(properties);
 }
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
@@ -82,7 +87,7 @@ function parseSubnet (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: J
   const vpcId = resolveValue(diff, tfPlan, tfEntry, 'vpc_id');
   const tagSet = resolveValue(diff, tfPlan, tfEntry, 'tags');
 
-  return {
+  const properties = {
     assignIpv6AddressOnCreation,
     availabilityZone,
     availabilityZoneId,
@@ -98,6 +103,8 @@ function parseSubnet (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: J
     vpcId,
     tagSet
   };
+  
+  return dontReturnEmpty(properties);
 }
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RouteTableAssociation.html
@@ -108,11 +115,12 @@ function parseRouteTableAssociation (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFi
   const routeTableId = resolveValue(diff, tfPlan, tfEntry, 'route_table_id');
   const subnetId = resolveValue(diff, tfPlan, tfEntry, 'subnet_id');
 
-  return {
+  const properties = {
     gatewayId,
     routeTableId,
     subnetId
   };
+  return dontReturnEmpty(properties);
 }
 
 // https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Route.html
@@ -134,7 +142,7 @@ function parseRoute (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: Js
   const vpcPeeringConnectionId = resolveValue(diff, tfPlan, tfEntry, 'vpc_peering_connection_id');
   const vpcEndpointId = resolveValue(diff, tfPlan, tfEntry, 'vpc_endpoint_id');
 
-  return {
+  const properties = {
     carrierGatewayId,
     coreNetworkArn,
     destinationCidrBlock,
@@ -150,6 +158,8 @@ function parseRoute (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJson: Js
     vpcEndpointId,
     vpcPeeringConnectionId
   };
+
+  return dontReturnEmpty(properties);
 }
 
 interface TfJsonEntry {
@@ -186,11 +196,13 @@ function parseRouteTable (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
       const routeTableId = resolveValue(diff, tfPlan, entry.properties, 'route_table_id');
       const subnetId = resolveValue(diff, tfPlan, entry.properties, 'subnet_id');
 
-      return {
+      const properties = {
         gatewayId,
         routeTableId,
         subnetId
       };
+
+      return dontReturnEmpty(properties);
     });
 
   const routeSet = [];
@@ -212,7 +224,7 @@ function parseRouteTable (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
         const vpcPeeringConnectionId = resolveValue(diff, tfPlan, route, 'vpc_peering_connection_id');
         const vpcEndpointId = resolveValue(diff, tfPlan, route, 'vpc_endpoint_id');
 
-        return {
+        const properties = {
           carrierGatewayId,
           coreNetworkArn,
           destinationCidrBlock,
@@ -228,6 +240,8 @@ function parseRouteTable (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
           vpcEndpointId,
           vpcPeeringConnectionId
         };
+
+        return dontReturnEmpty(properties);
       })
     );
   } else {
@@ -252,7 +266,7 @@ function parseRouteTable (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
           const vpcPeeringConnectionId = resolveValue(diff, tfPlan, entry.properties, 'vpc_peering_connection_id');
           const vpcEndpointId = resolveValue(diff, tfPlan, entry.properties, 'vpc_endpoint_id');
 
-          return {
+          const properties = {
             carrierGatewayId,
             coreNetworkArn,
             destinationCidrBlock,
@@ -268,6 +282,8 @@ function parseRouteTable (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
             vpcEndpointId,
             vpcPeeringConnectionId
           };
+
+          return dontReturnEmpty(properties);
         })
     );
   }
@@ -276,12 +292,14 @@ function parseRouteTable (diff: TfDiff, tfPlan: Json, _tfFiles: TxtFile[], tfJso
   const tagSet = resolveValue(diff, tfPlan, tfEntry, 'tags');
   const vpcId = resolveValue(diff, tfPlan, tfEntry, 'vpc_id');
 
-  return {
+  const properties = {
     associationSet,
     routeSet,
     tagSet,
     vpcId
   };
+
+  return dontReturnEmpty(properties);
 }
 
 export {
