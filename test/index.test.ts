@@ -56,7 +56,7 @@ jest.mock('../src/hashicorp-aws', () => ({
   parseVpc: mockParseVpc
 }));
 
-import { TfDiff } from '@tinystacks/predeploy-infra';
+import { TfDiff } from '@tinystacks/precloud';
 import { TinyStacksTerraformResourceParser } from '../src';
 
 const fs = require('fs');

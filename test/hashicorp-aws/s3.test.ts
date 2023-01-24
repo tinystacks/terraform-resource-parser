@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { TfDiff } from '@tinystacks/predeploy-infra';
+import { TfDiff } from '@tinystacks/precloud';
 import { parseS3Bucket } from '../../src/hashicorp-aws';
 
 const mockTfFile = fs.readFileSync(path.resolve(__dirname, '../test-data/main.tf')).toString();
