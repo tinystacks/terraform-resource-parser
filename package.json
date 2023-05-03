@@ -64,7 +64,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@cdktf/hcl2json": "^0.15.0",
+    "@cdktf/hcl2json": "^0.15.5",
     "cached": "^6.1.0",
     "lodash.get": "^4.4.2",
     "lodash.isnil": "^4.0.0",
